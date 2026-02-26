@@ -1,0 +1,27 @@
+{
+  "name": "automacao-movie",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "test": "npm run test:report",
+    "test:e2e": "npx cypress run",
+    "report:pre": "powershell -Command \"if (Test-Path cypress/reports) { Remove-Item -Recurse -Force cypress/reports }\"",
+    "report:pre-ci": "rm -rf cypress/reports",
+    "report:pdf": "node scripts/generate-pdf.js",
+    "test:report": "npm run report:pre && npm run test:e2e && npm run report:pdf"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "axe-core": "^4.11.1",
+    "cypress": "^15.11.0",
+    "cypress-axe": "^1.7.0",
+    "cypress-mochawesome-reporter": "^4.0.2",
+    "mochawesome": "^7.1.4",
+    "mochawesome-merge": "^5.1.1",
+    "mochawesome-report-generator": "^6.3.2",
+    "puppeteer": "^24.37.5"
+  }
+}

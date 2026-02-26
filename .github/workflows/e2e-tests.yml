@@ -1,0 +1,50 @@
+name: E2E Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-with-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Cypress tests and generate PDF
+        # We use a custom run command to ensure puppeteer has necessary dependencies in ubuntu
+        # and to run our orchestrated report script. 
+        # Note: 'npm run test:report' uses powershell in our local scripts. 
+        # For CI (Ubuntu), we should ensure the scripts are compatible or provide a CI-specific script.
+        run: |
+          npm run report:pre-ci || true
+          npx cypress run
+          node scripts/generate-pdf.js
+        env:
+          # Use a headless browser for CI
+          CYPRESS_BROWSER: chrome
+
+      - name: Upload PDF Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cypress-report-pdf
+          path: cypress/reports/report.pdf
+
+      - name: Upload HTML Report (Optional)
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cypress-report-html
+          path: cypress/reports/

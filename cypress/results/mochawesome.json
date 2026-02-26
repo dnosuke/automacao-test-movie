@@ -1,0 +1,162 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-02-26T15:19:38.291Z",
+    "end": "2026-02-26T15:19:49.059Z",
+    "duration": 10768,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "8e334479-e295-46c2-92fe-9482f665ee4a",
+      "title": "",
+      "fullFile": "cypress\\e2e\\movie_search.cy.js",
+      "file": "cypress\\e2e\\movie_search.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "c2ebf2b0-1a58-4a39-8027-0c4ae1b49199",
+          "title": "Movie Search E2E Tests",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should load the home page and show the search bar",
+              "fullTitle": "Movie Search E2E Tests should load the home page and show the search bar",
+              "timedOut": null,
+              "duration": 6607,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('input.form-control.me-2').should('be.visible');\ncy.get('input[type=\"submit\"], button.btn-outline-success').should('be.visible');",
+              "err": {},
+              "uuid": "269c3b1a-7bb2-4e84-a0a1-cf566c720fa4",
+              "parentUUID": "c2ebf2b0-1a58-4a39-8027-0c4ae1b49199",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should search for a movie and show results",
+              "fullTitle": "Movie Search E2E Tests should search for a movie and show results",
+              "timedOut": null,
+              "duration": 1301,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const movieTitle = 'Batman';\ncy.get('input.form-control.me-2').type(movieTitle);\ncy.get('input[type=\"submit\"], button.btn-outline-success').first().click();\n// Verify results appear\ncy.get('.card', {\n  timeout: 10000\n}).should('have.length.at.least', 1);\n// Check if the title exists in at least one card\ncy.get('.card').contains(movieTitle, {\n  matchCase: false\n}).should('exist');",
+              "err": {},
+              "uuid": "494acf43-63d9-4f7d-84b8-e328571cebff",
+              "parentUUID": "c2ebf2b0-1a58-4a39-8027-0c4ae1b49199",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should navigate to movie details and show information",
+              "fullTitle": "Movie Search E2E Tests should navigate to movie details and show information",
+              "timedOut": null,
+              "duration": 1313,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const movieTitle = 'Batman';\ncy.get('input.form-control.me-2').type(movieTitle);\ncy.get('input[type=\"submit\"], button.btn-outline-success').first().click();\n// Click on the first movie card\ncy.get('.card', {\n  timeout: 10000\n}).first().click();\n// Verify URL change (the app uses /filme)\ncy.url().should('include', '/filme');\n// Verify detail page elements\ncy.get('h1, h2').should('be.visible');\n// Overview usually in a p tag\ncy.get('p').should('not.be.empty');",
+              "err": {},
+              "uuid": "3c35df9f-0fb8-433b-bc7a-4ee157fc7d8b",
+              "parentUUID": "c2ebf2b0-1a58-4a39-8027-0c4ae1b49199",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should navigate back to home page from details",
+              "fullTitle": "Movie Search E2E Tests should navigate back to home page from details",
+              "timedOut": null,
+              "duration": 1384,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Search and click first movie\ncy.get('input.form-control.me-2').type('Batman');\ncy.get('input[type=\"submit\"], button.btn-outline-success').first().click();\ncy.get('.card').first().click();\ncy.url().should('include', '/filme');\n// Click on the \"Search Filmes\" logo in the navbar\ncy.contains('Search Filmes').click();\n// Verify we are back at home (root)\ncy.url().should('eq', Cypress.config().baseUrl + '/');\ncy.get('input.form-control.me-2').should('be.visible');",
+              "err": {},
+              "uuid": "3741be23-3eb4-4c67-b362-b3c092f75f37",
+              "parentUUID": "c2ebf2b0-1a58-4a39-8027-0c4ae1b49199",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "269c3b1a-7bb2-4e84-a0a1-cf566c720fa4",
+            "494acf43-63d9-4f7d-84b8-e328571cebff",
+            "3c35df9f-0fb8-433b-bc7a-4ee157fc7d8b",
+            "3741be23-3eb4-4c67-b362-b3c092f75f37"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 10605,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/results",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.2"
+    }
+  }
+}
